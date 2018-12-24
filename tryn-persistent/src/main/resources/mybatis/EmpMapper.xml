@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.dave.sharding.mapper.EmpMapper">
+
+
+      <insert id="batchSaveEmp" parameterType="java.util.List">
+        insert into employee (id, code, create_time)
+        values
+        <foreach collection="emps" item="emp" index="index" separator=",">
+            (
+            #{emp.id}, #{emp.code},
+            #{emp.createTime}
+            )
+        </foreach>
+    </insert>
+
+    <select id="selectPageVo" resultType="com.dave.sharding.entity.Employee">
+        SELECT id,code,create_time from employee WHERE DATE_FORMAT(create_time, '%Y-%m-%d') = DATE_FORMAT(#{createDate}, '%Y-%m-%d')
+    </select>
+
+</mapper>

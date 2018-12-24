@@ -5,12 +5,11 @@
 	<parent>
 		<groupId>com.tryndamere</groupId>
 		<artifactId>zhibo8</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>0.0.1</version>
 	</parent>
 	<groupId>com.tryndamere.zhibo8</groupId>
 	<artifactId>tryn-model</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>tryn-model</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -23,12 +22,7 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+
 	</build>
 
 </project>

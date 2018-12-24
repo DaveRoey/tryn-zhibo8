@@ -5,12 +5,11 @@
 	<parent>
 		<groupId>com.tryndamere</groupId>
 		<artifactId>zhibo8</artifactId>
-		<version>0.0.1-SNAPSHOT</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>0.0.1</version>
 	</parent>
 	<groupId>com.tryndamere.zhibo8</groupId>
 	<artifactId>tryn-persistent</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>tryn-persistent</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -22,12 +21,12 @@
 		<dependency>
 			<groupId>com.tryndamere.zhibo8</groupId>
 			<artifactId>tryn-common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.tryndamere.zhibo8</groupId>
 			<artifactId>tryn-model</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 		</dependency>
 
 		<dependency>
@@ -57,20 +56,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
-		<!--ES-->
+		<!--&lt;!&ndash;ES&ndash;&gt;
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-		</dependency>
+		</dependency>-->
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
-		</plugins>
+
 	</build>
 
 </project>

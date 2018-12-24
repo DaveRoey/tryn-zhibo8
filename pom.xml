@@ -8,9 +8,10 @@
 		<version>2.1.1.RELEASE</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
+	<packaging>pom</packaging>
 	<groupId>com.tryndamere</groupId>
 	<artifactId>zhibo8</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>zhibo8</name>
 	<description>Demo project for Spring Boot</description>
 
@@ -19,6 +20,8 @@
 		<module>tryn-persistent</module>
 		<module>tryn-api</module>
 		<module>tryn-common</module>
+		<module>tryn-business</module>
+		<module>tryn-model</module>
 	</modules>
 
 	<properties>

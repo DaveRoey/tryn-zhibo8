@@ -1,6 +1,8 @@
 package com.tryndamere.zhibo8.trynmodel.pojo;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.RequiredArgsConstructor;
 
 import java.util.Date;
 
@@ -9,6 +11,7 @@ import java.util.Date;
  * Describes
  */
 @Data
+@AllArgsConstructor
 public class Employee {
 
     private Long id;

@@ -30,12 +30,38 @@
 			<groupId>us.codecraft</groupId>
 			<artifactId>webmagic-core</artifactId>
 			<version>0.7.3</version>
+            <exclusions>
+                <!--排除 httpcore 4.4.10-->
+                <exclusion>
+                    <groupId>org.apache.httpcomponents</groupId>
+                    <artifactId>httpcore</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>us.codecraft</groupId>
 			<artifactId>webmagic-extension</artifactId>
 			<version>0.7.3</version>
 		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>15.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.tryndamere.zhibo8</groupId>
+			<artifactId>tryn-model</artifactId>
+			<version>0.0.1</version>
+			<scope>compile</scope>
+		</dependency>
+
+        <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpcore</artifactId>
+            <version>4.4.4</version>
+        </dependency>
+
 	</dependencies>
 
 	<build>

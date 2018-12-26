@@ -1,11 +1,9 @@
 package com.tryndamere.zhibo8.harvest.processor;
 
 import com.tryndamere.zhibo8.harvest.pipeline.CommentPipeline;
-import sun.jvm.hotspot.tools.JSnap;
 import us.codecraft.webmagic.Page;
 import us.codecraft.webmagic.Site;
 import us.codecraft.webmagic.Spider;
-import us.codecraft.webmagic.pipeline.ConsolePipeline;
 import us.codecraft.webmagic.processor.PageProcessor;
 import us.codecraft.webmagic.selector.Json;
 

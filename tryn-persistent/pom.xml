@@ -56,11 +56,11 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
-		<!--&lt;!&ndash;ES&ndash;&gt;
+		<!--ES-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-elasticsearch</artifactId>
-		</dependency>-->
+		</dependency>
 	</dependencies>
 
 	<build>

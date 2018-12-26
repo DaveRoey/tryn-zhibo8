@@ -24,14 +24,14 @@
         <module>tryn-model</module>
     </modules>
 
-    <properties>
+    <!--<properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
         <spring-cloud.version>Finchley.SR2</spring-cloud.version>
         <spring-io.version>Cairo-SR5</spring-io.version>
-        <!--<spring-io.version>Brussels-SR14</spring-io.version>-->
-    </properties>
+        &lt;!&ndash;<spring-io.version>Brussels-SR14</spring-io.version>&ndash;&gt;
+    </properties>-->
 
 
     <dependencies>
@@ -50,10 +50,10 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-devtools</artifactId>
-        </dependency>
+        </dependency>-->
         <!--mybatis-plus-->
         <dependency>
             <groupId>com.baomidou</groupId>
@@ -85,7 +85,7 @@
         </plugins>
     </build>
 
-    <dependencyManagement>
+   <!-- <dependencyManagement>
         <dependencies>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
@@ -102,6 +102,6 @@
                 <scope>import</scope>
             </dependency>
         </dependencies>
-    </dependencyManagement>
+    </dependencyManagement>-->
 
 </project>

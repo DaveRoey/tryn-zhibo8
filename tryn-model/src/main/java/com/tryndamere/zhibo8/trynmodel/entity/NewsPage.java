@@ -21,10 +21,11 @@ public class NewsPage {
     String id;
     @Field
     private String url;
+    @Field
+    private String title;
     @Field( type = FieldType.Date,
             format = DateFormat.custom,pattern = "yyyy-MM-dd HH:mm:ss"
     )
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern ="yyyy-MM-dd HH:mm:ss",timezone="GMT+8")
-    private String title;
     private Date releaseTime;
 }

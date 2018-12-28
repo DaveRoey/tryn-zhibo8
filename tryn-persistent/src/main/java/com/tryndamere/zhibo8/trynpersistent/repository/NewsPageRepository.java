@@ -10,5 +10,10 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public interface NewsPageRepository extends CrudRepository<NewsPage,String> {
+    /**
+     * 检测url是否存在
+     * @return
+     */
+    int countByUrl(String url);
 
 }

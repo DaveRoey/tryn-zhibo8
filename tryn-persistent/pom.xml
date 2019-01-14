@@ -7,6 +7,7 @@
 		<artifactId>zhibo8</artifactId>
 		<version>0.0.1</version>
 	</parent>
+
 	<groupId>com.tryndamere.zhibo8</groupId>
 	<artifactId>tryn-persistent</artifactId>
 	<version>0.0.1</version>
@@ -55,6 +56,11 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+			<version>3.0.6</version>
 		</dependency>
 		<!--ES-->
 		<dependency>

@@ -1,5 +1,6 @@
 package com.tryndamere.zhibo8.trynapi.action;
 
+import brave.Tracer;
 import com.tryndamere.zhibo8.trynbusiness.business.EmployeeBusiness;
 import com.tryndamere.zhibo8.trynmodel.pojo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 /**
  * Created by Dave on 2018/12/20
@@ -23,6 +25,8 @@ public class EmployeeAction extends BaseAction {
 
     @Autowired
     private EmployeeBusiness employeeBusiness;
+    @Autowired
+    private Tracer tracer;
 
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
@@ -32,6 +36,14 @@ public class EmployeeAction extends BaseAction {
         result.put("result", "success");
 
         return getSuccessMap(result, HttpStatus.OK);
+    }
+
+    @RequestMapping("/hi2")
+    public String hi2() throws InterruptedException {
+        int millis = new Random().nextInt(1000);
+        Thread.sleep(millis);
+        this.tracer.currentSpan().tag("random-sleep-millis", String.valueOf(millis));
+        return "hi2";
     }
 
 

@@ -4,13 +4,8 @@ import com.tryndamere.zhibo8.trynbusiness.business.NewsPageBusiness;
 import com.tryndamere.zhibo8.trynmodel.entity.NewsPage;
 import com.tryndamere.zhibo8.trynpersistent.repository.NewsPageRepository;
 import org.apache.lucene.queryparser.classic.QueryParser;
-import org.elasticsearch.index.search.QueryParserHelper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
-import org.springframework.data.elasticsearch.core.query.NativeSearchQuery;
-import org.springframework.data.elasticsearch.core.query.SearchQuery;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 

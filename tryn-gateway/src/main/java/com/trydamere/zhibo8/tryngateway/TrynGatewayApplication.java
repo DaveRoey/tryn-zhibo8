@@ -7,6 +7,8 @@ import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.reactive.function.BodyInserters;
 import org.springframework.web.reactive.function.server.RequestPredicates;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -14,10 +16,12 @@ import org.springframework.web.reactive.function.server.RouterFunctions;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 @SpringCloudApplication
+@RestController
 public class TrynGatewayApplication {
 	public static final String HELLO_FROM_FAKE_ACTUATOR_METRICS_GATEWAY_REQUESTS = "hello from fake /actuator/metrics/gateway.requests";
 	@Value("${test.uri:http://httpbin.org:80}")
@@ -138,6 +142,13 @@ public class TrynGatewayApplication {
 		}
 	}
 
+	@RequestMapping(value = "/fallbackcontroller")
+	public Map<String, String> fallBackController() {
+		Map<String, String> res = new HashMap();
+		res.put("code", "-100");
+		res.put("data", "service not available");
+		return res;
+	}
 
 }
 

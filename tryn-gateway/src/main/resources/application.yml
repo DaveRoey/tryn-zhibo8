@@ -17,13 +17,12 @@ test:
 
 
 spring:
+  application:
+    name: tryn-gateway
   jmx:
     enabled: false
   cloud:
     gateway:
-      default-filters:
-      - PrefixPath=/httpbin
-      - AddResponseHeader=X-Response-Default-Foo, Default-Bar
 
       routes:
       # =====================================
@@ -42,6 +41,15 @@ spring:
         order: 10000
         predicates:
         - Path=/**
+      - id: api_route
+        uri: lb://tryn-api
+        predicates:
+        - Path=/emp/**
+      default-filters:
+      - name: Hystrix
+        args:
+          name: fallbackcmd
+          fallbackUri: forward:/fallbackcontroller
 
 logging:
   level:

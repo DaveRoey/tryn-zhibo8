@@ -24,6 +24,7 @@
         <module>tryn-model</module>
         <module>tryn-registry</module>
         <module>tryn-control</module>
+        <module>tryn-config</module>
     </modules>
 
     <properties>

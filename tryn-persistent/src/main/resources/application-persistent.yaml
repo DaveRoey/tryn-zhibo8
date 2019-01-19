@@ -2,13 +2,13 @@ sharding:
   jdbc:
     datasource:
       ds0:
-        password: wangyang
+        password: 123456
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.jdbc.Driver
         url: jdbc:mysql://118.24.0.221:3306/shard_1
         username: root
       ds1:
-        password: wangyang
+        password: 123456
         type: com.alibaba.druid.pool.DruidDataSource
         driver-class-name: com.mysql.jdbc.Driver
         url: jdbc:mysql://118.24.0.221:3306/shard_2

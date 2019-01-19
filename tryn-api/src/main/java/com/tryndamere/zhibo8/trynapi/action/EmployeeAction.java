@@ -4,6 +4,7 @@ import brave.Tracer;
 import com.tryndamere.zhibo8.trynbusiness.business.EmployeeBusiness;
 import com.tryndamere.zhibo8.trynmodel.pojo.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,8 @@ public class EmployeeAction extends BaseAction {
     @Autowired
     private Tracer tracer;
 
+    @Value("${server.port}")
+    private String port;
 
     @RequestMapping(value = "add", method = RequestMethod.POST)
     public ResponseEntity<Map<String, Object>> addEmp(@RequestBody Employee employee) {
@@ -43,7 +46,7 @@ public class EmployeeAction extends BaseAction {
         int millis = new Random().nextInt(1000);
         Thread.sleep(millis);
         this.tracer.currentSpan().tag("random-sleep-millis", String.valueOf(millis));
-        return "hi2";
+        return "hi2"+port;
     }
 
 

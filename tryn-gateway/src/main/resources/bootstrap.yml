@@ -1,6 +1,18 @@
 spring:
   application:
     name: gateway
+  profiles:
+    active: dev
   cloud:
     config:
-      uri: http://configserver
+      allow-override: false
+      discovery:
+        enabled: true #开启服务发现
+        service-id: config-server #指定configserver的serviceId
+      enabled: false #开启config读取
+
+eureka:
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/

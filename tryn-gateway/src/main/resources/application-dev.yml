@@ -18,7 +18,7 @@ test:
 
 spring:
   application:
-    name: tryn-gateway
+    name: gateway
   jmx:
     enabled: false
   cloud:
@@ -41,15 +41,28 @@ spring:
         order: 10000
         predicates:
         - Path=/**
-      - id: api_route
+      - id: api_a
         uri: lb://tryn-api
         predicates:
         - Path=/emp/**
+        - Weight=api, 10
       default-filters:
       - name: Hystrix
         args:
           name: fallbackcmd
           fallbackUri: forward:/fallbackcontroller
+
+      - id: api_b
+        uri: lb://tryn-api
+        predicates:
+        - Path=/emp/**
+        - Weight=api, 10
+        default-filters:
+        - name: Hystrix
+        args:
+          name: fallbackcmd
+          fallbackUri: forward:/fallbackcontroller
+
 
 logging:
   level:

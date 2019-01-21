@@ -150,5 +150,13 @@ public class TrynGatewayApplication {
 		return res;
 	}
 
+	@RequestMapping(value = "/test")
+	public Map<String, String> test() {
+		Map<String, String> res = new HashMap();
+		res.put("code", "-100");
+		res.put("data",uri);
+		return res;
+	}
+
 }
 

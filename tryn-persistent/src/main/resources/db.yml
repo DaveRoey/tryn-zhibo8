@@ -1,0 +1,9 @@
+db:
+  qh:
+    size: 8
+    range: 0-7
+    vip: 192.168.73.29
+  sc:
+    size: 16
+    range: 0-15
+    vip: 192.168.73.30

@@ -4,3 +4,8 @@ server:
 spring:
   profiles:
     active: common,business,persistent
+  redis:
+    cluster:
+      nodes: 192.168.73.29:7001
+      max-redirects: 3
+    password: aaa

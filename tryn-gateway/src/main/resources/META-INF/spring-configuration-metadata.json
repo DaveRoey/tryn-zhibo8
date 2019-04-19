@@ -1,0 +1,39 @@
+{
+  "properties": [
+    {
+      "sourceType":"com.trydamere.zhibo8.tryngateway.model.NacosConfigProperties",
+      "name": "spring.cloud.nacos.config.file-extension",
+      "type": "java.lang.String",
+      "defaultValue": "properties",
+      "description": "the suffix of nacos config dataId, also the file extension of config content, only support properties now."
+    },
+    {
+      "sourceType":"com.trydamere.zhibo8.tryngateway.model.NacosConfigProperties",
+      "name": "spring.cloud.nacos.config.server-addr",
+      "type": "java.lang.String",
+      "defaultValue": "UTF-8",
+      "description": "default serverAddr for nacos config content."
+    },
+    {
+      "sourceType":"com.trydamere.zhibo8.tryngateway.model.NacosConfigProperties",
+      "name": "spring.cloud.nacos.config.namespace",
+      "type": "java.lang.String",
+      "defaultValue": "UTF-8",
+      "description": "default namespace for nacos config content."
+    },
+    {
+      "sourceType":"com.trydamere.zhibo8.tryngateway.model.NacosConfigProperties",
+      "name": "spring.cloud.nacos.config.group",
+      "type": "java.lang.String",
+      "defaultValue": "DEFAULT_GROUP",
+      "description": "default namespace for nacos config content."
+    },
+    {
+      "sourceType":"com.trydamere.zhibo8.tryngateway.model.NacosConfigProperties",
+      "name": "spring.cloud.nacos.config.service-name",
+      "type": "java.lang.String",
+      "defaultValue": "",
+      "description": "default namespace for nacos config content."
+    }
+  ]
+}

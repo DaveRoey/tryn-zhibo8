@@ -22,9 +22,7 @@
         <module>tryn-common</module>
         <module>tryn-business</module>
         <module>tryn-model</module>
-        <module>tryn-registry</module>
         <module>tryn-control</module>
-        <module>tryn-config</module>
     </modules>
 
     <properties>
@@ -35,6 +33,8 @@
         <spring-io.version>Cairo-SR5</spring-io.version>
         <spring-boot.admin>2.0.4</spring-boot.admin>
         <spring-boot.version>2.0.5.RELEASE</spring-boot.version>
+        <spring-cloud-alibaba.version>0.2.1.RELEASE</spring-cloud-alibaba.version>
+        <nacos.client>0.9.0</nacos.client>
     </properties>
 
 
@@ -43,8 +43,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -54,12 +52,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.fasterxml.jackson.core</groupId>
-            <artifactId>jackson-databind</artifactId>
-            <!--<version>2.9.7</version>-->
         </dependency>
     </dependencies>
 
@@ -78,6 +70,13 @@
                 <groupId>io.spring.platform</groupId>
                 <artifactId>platform-bom</artifactId>
                 <version>${spring-io.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>

@@ -2,74 +2,67 @@ server:
   port: 8080
   tomcat:
     max-threads: 4000
-
-eureka:
-  client:
-    registryFetchIntervalSeconds: 5
-    serviceUrl:
-      defaultZone: ${EUREKA_SERVICE_URL:http://localhost:8761}/eureka/
-test:
-#  hostport: httpbin.org:80
-#  hostport: localhost:5000
-#  uri: http://${test.hostport}
-  uri: lb://httpbin
-
-
+zuul:
+  host:
+    max-total-connections: 4000
+    max-per-route-connections: 400
+  routes:
+    users:
+      path: /bd/**
+      serviceId: tryn-api
+      strip-prefix: false
+  ribbon-isolation-strategy: thread
+  ribbon:
+    eager-load:
+      enabled: true
+    threadPool:
+      useSeparateThreadPools: true
+      threadPoolKeyPrefix: api-gateway
+  #关闭重试
+  retryable: false
+  #/oauth/token需要请求头处理
+  sensitive-headers:
+  ignored-headers: Access-Control-Allow-Credentials,Access-Control-Allow-Origin,Access-Control-Allow-Methods
+  add-host-header: true
 
 spring:
-  application:
-    name: gateway
-  jmx:
-    enabled: false
+  # sentinel动态配置规则
   cloud:
-    gateway:
-
-      routes:
-      # =====================================
-      # to run server
-      # $ wscat --listen 9000
-      # to run client
-      # $ wscat --connect ws://localhost:8080/echo
-      - id: websocket_test
-        uri: ws://localhost:9000
-        order: 9000
-        predicates:
-        - Path=/echo
-      # =====================================
-      - id: default_path_to_httpbin
-        uri: ${test.uri}
-        order: 10000
-        predicates:
-        - Path=/**
-      - id: api_a
-        uri: lb://tryn-api
-        predicates:
-        - Path=/emp/**
-        - Weight=api, 10
-      default-filters:
-      - name: Hystrix
-        args:
-          name: fallbackcmd
-          fallbackUri: forward:/fallbackcontroller
-
-      - id: api_b
-        uri: lb://tryn-api
-        predicates:
-        - Path=/emp/**
-        - Weight=api, 10
-        default-filters:
-        - name: Hystrix
-        args:
-          name: fallbackcmd
-          fallbackUri: forward:/fallbackcontroller
+    sentinel:
+      datasource:
+        # 限流
+        ds1:
+          nacos:
+            server-addr: ${tryn.nacos.server-addr}
+            dataId: sentinel-flow
+            groupId: DEFAULT_GROUP
+            rule-type: flow
+        # 熔断
+        ds2:
+          nacos:
+            server-addr: ${tryn.nacos.server-addr}
+            dataId: sentinel-degrade
+            groupId: DEFAULT_GROUP
+            rule-type: degrade
+        # 系统负载保护
+        ds4:
+          nacos:
+            server-addr: ${tryn.nacos.server-addr}
+            dataId: sentinel-system
+            groupId: DEFAULT_GROUP
+            rule-type: system
 
 
-logging:
-  level:
-    org.springframework.cloud.gateway: TRACE
-    org.springframework.http.server.reactive: DEBUG
-    org.springframework.web.reactive: DEBUG
-    reactor.ipc.netty: DEBUG
-    reactor.netty: DEBUG
-
-management.endpoints.web.exposure.include: '*'
+hystrix:
+  threadpool:
+    default:
+      coreSize: 100
+      maximumSize: 2000
+      allowMaximumSizeToDivergeFromCoreSize: true
+      maxQueueSize: -1
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000

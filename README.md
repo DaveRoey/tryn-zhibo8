@@ -45,4 +45,4 @@
 
 ## LISENCE
 
-​	在[Apache 2.0 lisence](http://opensource.org/licenses/Apache-2.0)下[运行
+[！[ 996.icu ]（https://img.shields.io/badge/link-996.icu-red.svg）]（https://996.icu）

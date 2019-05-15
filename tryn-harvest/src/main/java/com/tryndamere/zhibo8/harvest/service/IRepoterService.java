@@ -14,4 +14,6 @@ import com.tryndamere.zhibo8.harvest.entity.Repoter;
 public interface IRepoterService extends IService<Repoter> {
 
     Repoter queryRepoterByName(String name);
+
+    Long saveRepoter(String reporterName);
 }

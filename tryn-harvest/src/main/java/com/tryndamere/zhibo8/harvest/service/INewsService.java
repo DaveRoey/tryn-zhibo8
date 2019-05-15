@@ -20,4 +20,7 @@ public interface INewsService extends IService<News> {
      * @param param
      */
     void saveNews(GatherNewsVo param);
+
+    News queryNewsByUrl(String url);
+
 }

@@ -1,5 +1,6 @@
 package com.tryndamere.zhibo8.harvest.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tryndamere.zhibo8.harvest.entity.News;
@@ -30,35 +31,28 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements IN
 
     @Override
     public void saveNews(GatherNewsVo param) {
-
+        Long reporterId = repoterService.saveRepoter(param.getReporterName());
+        News newsInfo = queryNewsByUrl(param.getUrl());
+        if (null == newsInfo) {
+            newsInfo = getNewsInfo(param, reporterId);
+            this.save(newsInfo);
+        }
     }
 
-    private void setData(GatherNewsVo vo) {
-        Repoter reporter = new Repoter()
-                .setName(vo.getReporterName());
+    @Override
+    public News queryNewsByUrl(String url) {
+        return this.getOne(new QueryWrapper<News>()
+                .lambda()
+                .eq(News::getUrl, url));
+    }
 
-        long reporterId;
-
-        Repoter repoter = repoterService.queryRepoterByName(reporter.getName());
-        if (repoter == null) {
-
-            reporterId = IdWorker.getId();
-            new Repoter()
-                    .setId(reporterId)
-                    .setName(reporter.getName());
-            repoterService.save(reporter);
-        } else {
-            reporterId = repoter.getId();
-        }
-
-
-        News news = new News()
+    private News getNewsInfo(GatherNewsVo vo, Long repoterId) {
+        return new News()
                 .setContent(vo.getContent())
-                .setReporterId(reporterId)
+                .setReporterId(repoterId)
                 .setCreateTime(LocalDateTime.ofInstant(vo.getCreateTime().toInstant(), ZoneId.systemDefault()))
                 .setOrigin(vo.getOrigin())
                 .setTitle(vo.getTitle());
-
-
     }
+
 }

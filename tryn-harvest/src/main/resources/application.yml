@@ -1,11 +1,25 @@
 server:
   port: 8080
-
 spring:
-  profiles:
-    active: common,business,persistent
-  redis:
-    cluster:
-      nodes: 192.168.73.29:7001
-      max-redirects: 3
-    password: aaa
+  rabbitmq:
+    host: 47.103.3.192
+    port: 5672
+    username: admin
+    password: admin
+  datasource:
+    url: jdbc:mysql://47.103.3.192/zhibo8?useUnicode=true&characterEncoding=utf8&generateSimpleParameterMetadata=true&useSSL=false
+    username: root
+    password: 123456
+
+
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.tryndamere.zhibo8.harvest.entity
+  check-config-location: false
+  configuration:
+    map-underscore-to-camel-case: true
+  global-config:
+    db-config:
+      id-type: id_worker
+

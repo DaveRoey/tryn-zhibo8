@@ -1,6 +1,8 @@
 package com.tryndamere.zhibo8.harvest.mq;
 
+import com.tryndamere.zhibo8.harvest.mq.listener.GatherCommentReceiver;
 import com.tryndamere.zhibo8.harvest.mq.listener.GatherNewsReceiver;
+import com.tryndamere.zhibo8.harvest.mq.listener.GatherNewsTotalReceiver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AcknowledgeMode;
@@ -60,5 +62,16 @@ public class ConsumerConfig {
     @Bean
     public GatherNewsReceiver gatherNewsReceiver() {
         return new GatherNewsReceiver();
+    }
+
+    @Bean
+    public GatherNewsTotalReceiver gatherNewsTotalReceiver() {
+        return new GatherNewsTotalReceiver();
+    }
+
+
+    @Bean
+    public GatherCommentReceiver gatherCommentReceiver() {
+        return new GatherCommentReceiver();
     }
 }

@@ -41,10 +41,20 @@ public class GatherNewsVo implements Serializable {
     @PageFieldSelect(cssQuery = "#main > div.box.margin_top_10 > div.title > span > a:nth-child(1)")
     private String origin;
 
+    private String fileName;
+
     public String getReporterName() {
         if (!Strings.isNullOrEmpty(reporterName)) {
             return reporterName.replaceAll("[（）]", "");
         }
         return this.reporterName;
     }
+
+    public String getFileName() {
+        if (!Strings.isNullOrEmpty(this.url)) {
+            return this.url.substring(url.lastIndexOf("/") + 1).split("\\.")[0];
+        }
+        return fileName;
+    }
+
 }

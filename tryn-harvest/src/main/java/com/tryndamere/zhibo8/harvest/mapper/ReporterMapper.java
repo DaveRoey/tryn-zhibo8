@@ -1,7 +1,7 @@
 package com.tryndamere.zhibo8.harvest.mapper;
 
-import com.tryndamere.zhibo8.harvest.entity.News;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.tryndamere.zhibo8.harvest.entity.Reporter;
 
 /**
  * <p>
@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author dave
  * @since 2019-05-16
  */
-public interface NewsMapper extends BaseMapper<News> {
+public interface ReporterMapper extends BaseMapper<Reporter> {
 
 }

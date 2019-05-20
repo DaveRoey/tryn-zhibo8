@@ -2,6 +2,7 @@ package com.tryndamere.zhibo8.harvest.entity;
 
 import java.time.LocalDateTime;
 import java.io.Serializable;
+import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -24,8 +25,9 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 @ApiModel(value="News对象", description="")
 public class News implements Serializable {
-    @TableId(type = IdType.AUTO)
-    private long id;
+
+    @TableId(type = IdType.ID_WORKER)
+    private Long id;
     private static final long serialVersionUID = 1L;
 
     private Long reporterId;
@@ -34,7 +36,7 @@ public class News implements Serializable {
 
     private String title;
 
-    private LocalDateTime createTime;
+    private Date createTime;
 
     private String content;
 

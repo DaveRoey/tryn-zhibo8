@@ -21,7 +21,11 @@ public class GatherNewsReceiver {
     @RabbitListener(queues = "${rabbitmq.queue.gatherNews.name:tryn-gather-news}", containerFactory = "rabbitListenerContainerFactory")
     public void receive(@Payload GatherNewsVo param) {
         log.info("device runtime status consumer on database :{}", param);
-        newsService.saveNews(param);
+        if (param.getTitle() == null) {
+            //战报
+        } else {
+            newsService.saveNews(param);
+        }
 
     }
 

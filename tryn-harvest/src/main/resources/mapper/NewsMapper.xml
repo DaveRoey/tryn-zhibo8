@@ -4,7 +4,7 @@
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.tryndamere.zhibo8.harvest.entity.News">
-    <result column="id" property="id" />
+        <id column="id" property="id" />
         <result column="reporter_id" property="reporterId" />
         <result column="url" property="url" />
         <result column="title" property="title" />
@@ -15,8 +15,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id,
-        reporter_id, url, title, create_time, content, origin
+        id, reporter_id, url, title, create_time, content, origin
     </sql>
 
 </mapper>

@@ -16,17 +16,17 @@ import lombok.experimental.Accessors;
  * </p>
  *
  * @author dave
- * @since 2019-05-15
+ * @since 2019-05-16
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="Repoter对象", description="")
-public class Repoter implements Serializable {
+@ApiModel(value="Reporter对象", description="")
+public class Reporter implements Serializable {
 
-    @TableId(type = IdType.AUTO)
-    private long id;
     private static final long serialVersionUID = 1L;
+    @TableId(type = IdType.ID_WORKER)
+    private Long id;
 
     private String name;
 

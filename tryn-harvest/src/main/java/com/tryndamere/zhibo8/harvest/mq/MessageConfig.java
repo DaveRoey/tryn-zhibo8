@@ -23,10 +23,22 @@ public class MessageConfig {
     @Value("${rabbitmq.queue.gatherNews.name:tryn-gather-news}")
     private String gatherNewsQueue;
 
+    @Value("${rabbitmq.queue.gatherNews.name:tryn-gather-news-total}")
+    private String gatherNewsTotalQueue;
+
+    @Value("${rabbitmq.queue.gatherNews.name:tryn-gather-news-comment}")
+    private String gatherCommentQueue;
+
 
     @Value("${rabbitmq.queue.deviceStatusDataBase.bindingKey:tryn.gather.news}")
     private String gatherNewsBindingKey;
 
+
+    @Value("${rabbitmq.queue.deviceStatusDataBase.bindingKey:tryn.gather.news.total}")
+    private String gatherNewsTotalBindingKey;
+
+    @Value("${rabbitmq.queue.deviceStatusDataBase.bindingKey:tryn.gather.news.comment}")
+    private String gatherCommentBindingKey;
 
     /**
      * 数据采集交换机
@@ -44,6 +56,15 @@ public class MessageConfig {
         return new Queue(gatherNewsQueue, false, false, false, Maps.newHashMap());
     }
 
+    @Bean
+    public Queue gatherNewsTotalQueue() {
+        return new Queue(gatherNewsTotalQueue, false, false, false, Maps.newHashMap());
+    }
+
+    @Bean
+    public Queue gatherCommentQueue() {
+        return new Queue(gatherCommentQueue, false, false, false, Maps.newHashMap());
+    }
 
     @Bean
     public Binding deviceStatusDatabaseBinding(TopicExchange gatherChange, Queue gatherNewsQueue) {
@@ -52,5 +73,18 @@ public class MessageConfig {
                 .with(gatherNewsBindingKey);
     }
 
+    @Bean
+    public Binding gatherNewsTotalBinding(TopicExchange gatherChange, Queue gatherNewsTotalQueue) {
+        return BindingBuilder.bind(gatherNewsTotalQueue)
+                .to(gatherChange)
+                .with(gatherNewsTotalBindingKey);
+    }
+
+    @Bean
+    public Binding gatherCommentBinding(TopicExchange gatherChange, Queue gatherCommentQueue) {
+        return BindingBuilder.bind(gatherCommentQueue)
+                .to(gatherChange)
+                .with(gatherCommentBindingKey);
+    }
 
 }

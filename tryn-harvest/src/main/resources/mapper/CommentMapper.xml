@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tryndamere.zhibo8.harvest.mapper.CommentMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tryndamere.zhibo8.harvest.entity.Comment">
+        <id column="id" property="id"/>
+        <result column="parent_id" property="parentId"/>
+        <result column="news_id" property="newsId"/>
+        <result column="file_name" property="fileName"/>
+        <result column="mUid" property="mUid"/>
+        <result column="user_name" property="userName"/>
+        <result column="content" property="content"/>
+        <result column="create_time" property="createTime"/>
+        <result column="update_time" property="updateTime"/>
+        <result column="up" property="up"/>
+        <result column="down" property="down"/>
+        <result column="device_name" property="deviceName"/>
+        <result column="reply_count" property="replyCount"/>
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, parent_id, news_id, file_name, mUid, user_name, content, create_time, update_time, up, down, device_name, reply_count
+    </sql>
+
+</mapper>

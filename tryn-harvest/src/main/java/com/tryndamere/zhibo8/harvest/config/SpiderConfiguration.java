@@ -2,8 +2,6 @@ package com.tryndamere.zhibo8.harvest.config;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.tryndamere.zhibo8.harvest.domain.News;
-import com.tryndamere.zhibo8.harvest.domain.Reporter;
 import com.tryndamere.zhibo8.harvest.mq.sender.GatherNewsSender;
 import com.tryndamere.zhibo8.harvest.vo.CommentPageVo;
 import com.tryndamere.zhibo8.harvest.vo.GatherCommentVo;
@@ -45,7 +43,6 @@ public class SpiderConfiguration {
                         // 解析封装 PageVo 对象
                         String pageUrl = html.baseUri();
                         vo.setUrl(pageUrl);
-                        //setData(vo);
                         gatherNewsSender.send(vo);
                     }
                 }).build();

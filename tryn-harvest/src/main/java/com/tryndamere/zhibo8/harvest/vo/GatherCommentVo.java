@@ -20,7 +20,7 @@ import java.util.List;
 public class GatherCommentVo {
     private String id;
     @JsonProperty("filename")
-    private String fileNaem;
+    private String fileName;
     @JsonProperty("m_uid")
     private String mUid;
     private String username;

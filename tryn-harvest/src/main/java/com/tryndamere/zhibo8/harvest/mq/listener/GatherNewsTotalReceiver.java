@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.tryndamere.zhibo8.harvest.common.DateUtils;
 import com.tryndamere.zhibo8.harvest.dto.NewsTotalDto;
 import com.tryndamere.zhibo8.harvest.mq.sender.GatherCommentSender;
+import com.tryndamere.zhibo8.harvest.service.INewsCountInfoService;
 import com.tryndamere.zhibo8.harvest.service.INewsService;
 import com.tryndamere.zhibo8.harvest.vo.CommentPageVo;
 import com.tryndamere.zhibo8.harvest.vo.GatherNewsVo;
@@ -28,7 +29,9 @@ public class GatherNewsTotalReceiver {
     @Autowired
     INewsService newsService;
     @Autowired
-    GatherCommentSender gatherCommentSender;
+    private GatherCommentSender gatherCommentSender;
+    @Autowired
+    private INewsCountInfoService newsCountInfoService;
     private final Logger log = LoggerFactory.getLogger(GatherNewsTotalReceiver.class);
 
     @RabbitListener(queues = "${rabbitmq.queue.gatherNews.name:tryn-gather-news-total}", containerFactory = "rabbitListenerContainerFactory")
@@ -42,9 +45,16 @@ public class GatherNewsTotalReceiver {
                     public void parse(String url, String pageSource) {
                         ObjectMapper objectMapper = new ObjectMapper();
                         try {
+                            //解析data
                             CommentPageVo pageVo = objectMapper.readValue(pageSource, CommentPageVo.class);
+
+                            //计算新闻页数
                             int pageTotal = (int) (Math.ceil(pageVo.getRootNum() / 100.0) - 1);
                             param.setPageTotal(pageTotal);
+
+                            //保存新闻记录信息
+                            newsCountInfoService.saveNewsCountInfo(pageVo,param.getNewsId());
+
                             gatherCommentSender.send(param);
 
                         } catch (IOException e) {

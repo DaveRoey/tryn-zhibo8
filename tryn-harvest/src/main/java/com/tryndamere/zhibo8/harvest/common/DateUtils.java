@@ -1,6 +1,8 @@
 package com.tryndamere.zhibo8.harvest.common;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -16,4 +18,11 @@ public class DateUtils {
         SimpleDateFormat sdf = new SimpleDateFormat(pattern);
         return sdf.format(date);
     }
+
+    public static int  subDay(Date start,Date end){
+        Calendar calendar=Calendar.getInstance();
+        calendar.setTimeInMillis(end.getTime()-start.getTime());
+        return (calendar.get(Calendar.DATE)-1);
+    }
+
 }

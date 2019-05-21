@@ -7,9 +7,26 @@ spring:
     username: admin
     password: admin
   datasource:
-    url: jdbc:mysql://47.103.3.192/zhibo8?useUnicode=true&characterEncoding=utf8&generateSimpleParameterMetadata=true&useSSL=false
-    username: root
-    password: 123456
+    druid:
+      max-active: 200
+      initial-size: 5
+      min-idle: 5
+      url: jdbc:mysql://47.103.3.192/zhibo8?useUnicode=true&generateSimpleParameterMetadata=true&useSSL=false
+      username: root
+      password: 123456
+      test-on-borrow: true
+      test-on-return: true
+  redis:
+    password:
+    cluster:
+      nodes: 47.103.3.192:7000,47.103.3.192:7001,47.103.3.192:7002,47.103.3.192:7003,47.103.3.192:7004,47.103.3.192:7005
+      max-redirects: 3
+    lettuce:
+      pool:
+        max-idle: 20
+        max-active: 20
+        min-idle: 2
+        max-wait: 2000ms
 
 
 
@@ -23,3 +40,15 @@ mybatis-plus:
     db-config:
       id-type: id_worker
 
+
+xxl:
+  job:
+    executor:
+      logpath: logs
+      appname: zhibo8
+      port: 9999
+      logretentiondays: 3
+      ip:
+    admin:
+      addresses: http://localhost:8081/
+    accessToken:

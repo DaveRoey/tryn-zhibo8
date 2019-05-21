@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tryndamere.zhibo8.harvest.mapper.NewsCountInfoMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.tryndamere.zhibo8.harvest.entity.NewsCountInfo">
+        <id column="id" property="id" />
+        <result column="news_id" property="newsId" />
+        <result column="root_num" property="rootNum" />
+        <result column="hot_num" property="hotNum" />
+        <result column="all_num" property="allNum" />
+        <result column="root_normal_num" property="rootNormalNum" />
+        <result column="all_short_num" property="allShortNum" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, news_id, root_num, hot_num, all_num, root_normal_num, all_short_num
+    </sql>
+
+</mapper>

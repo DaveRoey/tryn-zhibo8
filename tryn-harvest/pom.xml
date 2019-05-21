@@ -72,6 +72,18 @@
             <version>1.8.0.RELEASE</version>
         </dependency>
 
+		<dependency>
+			<groupId>com.xuxueli</groupId>
+			<artifactId>xxl-job-core</artifactId>
+			<version>2.0.1</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.tryndamere.zhibo8</groupId>
+			<artifactId>redis-spring-boot-starter</artifactId>
+			<version>0.0.1</version>
+		</dependency>
+
 
 
 	</dependencies>

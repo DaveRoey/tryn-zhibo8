@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * <p>
- *  服务类
+ * 服务类
  * </p>
  *
  * @author dave
@@ -16,5 +16,15 @@ import java.util.List;
  */
 public interface ICommentService extends IService<Comment> {
 
-    void saveComment(List<GatherCommentVo> list,Long newsId);
+    void saveComment(List<GatherCommentVo> list, Long newsId);
+
+
+    /**
+     * 根据新闻ID和评论ID查找评论
+     *
+     * @param newsId
+     * @param commentId
+     * @return
+     */
+    public Comment queryCommentByCommentIdAndNewsId(Long newsId, String commentId);
 }

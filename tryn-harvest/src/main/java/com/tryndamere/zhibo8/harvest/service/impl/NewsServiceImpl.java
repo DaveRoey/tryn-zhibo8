@@ -37,19 +37,19 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements IN
 
     @Override
     public void saveNews(GatherNewsVo param) {
+        //保存记者信息
         Long reporterId = reporterService.saveRepoter(param.getReporterName());
+
+        //查询新闻是否存在
         News newsInfo = queryNewsByUrl(param.getUrl());
+
+        //保存新闻信息
         if (null == newsInfo) {
             newsInfo = getNewsInfo(param, reporterId);
             try {
+
                 this.save(newsInfo);
 
-                //采集新闻条数信息
-                gatherNewsTotalSender.send(new NewsTotalDto()
-                        .setNewsId(newsInfo.getId())
-                        .setUrl(newsInfo.getUrl())
-                        .setCreateDate(newsInfo.getCreateTime())
-                        .setFileName(param.getFileName()));
             } catch (Exception e) {
                 e.printStackTrace();
                 log.info("save news exception {}", e.getMessage());
@@ -57,7 +57,15 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements IN
 
         }
 
+        //采集新闻记录数信息
+        gatherNewsTotalSender.send(new NewsTotalDto()
+                .setNewsId(newsInfo.getId())
+                .setUrl(newsInfo.getUrl())
+                .setCreateDate(newsInfo.getCreateTime())
+                .setFileName(param.getFileName()));
+
     }
+
 
     @Override
     public News queryNewsByUrl(String url) {
@@ -65,6 +73,7 @@ public class NewsServiceImpl extends ServiceImpl<NewsMapper, News> implements IN
                 .lambda()
                 .eq(News::getUrl, url));
     }
+
 
     private News getNewsInfo(GatherNewsVo vo, Long repoterId) {
         Long newsId = IdWorker.getId();

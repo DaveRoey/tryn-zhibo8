@@ -30,7 +30,7 @@ public class MybatisPlusConfig {
      * SQL执行分析插件
      */
     @Bean
-    //@Profile({"dev", "test"})
+    @Profile({"dev", "test"})
     public PerformanceInterceptor performanceInterceptor() {
         return new PerformanceInterceptor().setFormat(true);
     }

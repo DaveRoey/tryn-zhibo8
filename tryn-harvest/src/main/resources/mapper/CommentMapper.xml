@@ -7,6 +7,7 @@
         <id column="id" property="id"/>
         <result column="parent_id" property="parentId"/>
         <result column="news_id" property="newsId"/>
+        <result column="comment_id" property="commentId"/>
         <result column="file_name" property="fileName"/>
         <result column="mUid" property="mUid"/>
         <result column="user_name" property="userName"/>
@@ -21,7 +22,7 @@
 
     <!-- 通用查询结果列 -->
     <sql id="Base_Column_List">
-        id, parent_id, news_id, file_name, mUid, user_name, content, create_time, update_time, up, down, device_name, reply_count
+        id, parent_id, news_id, comment_id, file_name, mUid, user_name, content, create_time, update_time, up, down, device_name, reply_count
     </sql>
 
 </mapper>

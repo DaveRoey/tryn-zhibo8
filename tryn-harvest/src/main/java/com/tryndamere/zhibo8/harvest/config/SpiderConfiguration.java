@@ -2,6 +2,7 @@ package com.tryndamere.zhibo8.harvest.config;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tryndamere.zhibo8.harvest.common.DateUtils;
 import com.tryndamere.zhibo8.harvest.mq.sender.GatherNewsSender;
 import com.tryndamere.zhibo8.harvest.vo.CommentPageVo;
 import com.tryndamere.zhibo8.harvest.vo.GatherCommentVo;
@@ -16,6 +17,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 /**
@@ -25,28 +29,6 @@ import java.util.List;
  */
 @Configuration
 public class SpiderConfiguration {
-    @Autowired
-    private GatherNewsSender gatherNewsSender;
-
-    @Bean(name = "gatherNewsCrawler")
-    public XxlCrawler gatherNewsCrawler() {
-        return new XxlCrawler.Builder()
-                .setUrls("https://news.zhibo8.cc/nba/more.htm")
-                .setAllowSpread(true)
-                .setWhiteUrlRegexs("https://news.zhibo8.cc/nba/.*/.*.htm")
-                .setThreadCount(1)
-                .setPauseMillis(1000)
-                .setTimeoutMillis(5000)
-                .setPageParser(new PageParser<GatherNewsVo>() {
-                    @Override
-                    public void parse(Document html, Element pageVoElement, GatherNewsVo vo) {
-                        // 解析封装 PageVo 对象
-                        String pageUrl = html.baseUri();
-                        vo.setUrl(pageUrl);
-                        gatherNewsSender.send(vo);
-                    }
-                }).build();
-    }
 
 
 

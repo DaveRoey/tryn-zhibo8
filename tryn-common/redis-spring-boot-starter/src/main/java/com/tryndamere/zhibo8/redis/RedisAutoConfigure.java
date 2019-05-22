@@ -28,9 +28,9 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @Date 2019/4/19
  * @Description
  */
-@ConditionalOnClass(RedisManager.class)
 @EnableConfigurationProperties({RedisProperties.class})
 @EnableCaching
+@ConditionalOnClass(RedisManager.class)
 public class RedisAutoConfigure {
     @Autowired
     private RedisProperties redisProperties;
@@ -38,12 +38,12 @@ public class RedisAutoConfigure {
     /**
      * RedisTemplate配置
      *
-     * @param factory
+     * @param connectionFactory
      */
     @Bean
-    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory factory) {
+    public RedisTemplate<String, Object> redisTemplate(RedisConnectionFactory connectionFactory) {
         RedisTemplate<String, Object> redisTemplate = new RedisTemplate<>();
-        redisTemplate.setConnectionFactory(factory);
+        redisTemplate.setConnectionFactory(connectionFactory);
         Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.setVisibility(PropertyAccessor.ALL, JsonAutoDetect.Visibility.ANY);
@@ -98,5 +98,22 @@ public class RedisAutoConfigure {
                 .poolConfig(genericObjectPoolConfig)
                 .build();
     }
+
+    /**
+     * 客户端连接池配置
+     *
+     * @param config
+     * @return
+     */
+    @Bean
+    public GenericObjectPoolConfig genericObjectPoolConfig() {
+        GenericObjectPoolConfig genericObjectPoolConfig = new GenericObjectPoolConfig();
+        genericObjectPoolConfig.setMaxIdle(redisProperties.getLettuce().getPool().getMaxIdle());
+        genericObjectPoolConfig.setMinIdle(redisProperties.getLettuce().getPool().getMinIdle());
+        genericObjectPoolConfig.setMaxTotal(redisProperties.getLettuce().getPool().getMaxActive());
+        genericObjectPoolConfig.setMaxWaitMillis(redisProperties.getLettuce().getPool().getMaxWait().toMillis());
+        return genericObjectPoolConfig;
+    }
+
 
 }

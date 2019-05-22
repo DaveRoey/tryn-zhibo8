@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.tryndamere.zhibo8.redis.RedisAutoConfigure

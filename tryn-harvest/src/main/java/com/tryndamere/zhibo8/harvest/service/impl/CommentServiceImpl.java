@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.tryndamere.zhibo8.harvest.entity.Comment;
 import com.tryndamere.zhibo8.harvest.entity.User;
 import com.tryndamere.zhibo8.harvest.mapper.CommentMapper;
+import com.tryndamere.zhibo8.harvest.mq.sender.SaveCommentSender;
 import com.tryndamere.zhibo8.harvest.service.ICommentService;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tryndamere.zhibo8.harvest.service.IUserService;
@@ -27,6 +28,8 @@ import java.util.List;
 public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> implements ICommentService {
     @Autowired
     private IUserService userService;
+    @Autowired
+    private SaveCommentSender commentSender;
 
     @Override
     public void saveComment(List<GatherCommentVo> list, Long newsId) {
@@ -35,16 +38,14 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
             final Comment comment = setComment(e, newsId);
             Long commentId = IdWorker.getId();
             comment.setId(commentId);
-            this.doSave(comment);
-            userService.saveUserInfo(e);
+            commentSender.send(comment);
 
             //保存子节点
             if (!e.getChildren().isEmpty()) {
                 e.getChildren().forEach(child -> {
                     Comment childComment = setComment(child, newsId);
                     childComment.setParentId(commentId);
-                    this.doSave(childComment);
-                    userService.saveUserInfo(child);
+                    commentSender.send(childComment);
                 });
             }
         });
@@ -75,6 +76,16 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
                 .eq(Comment::getCommentId, commentId));
     }
 
+    @Override
+    public void consumerComment(Comment comment) {
+        this.doSave(comment);
+        try {
+            userService.saveUserInfo(comment);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void doSave(Comment param) {
         Comment comment = this.queryCommentByCommentIdAndNewsId(param.getNewsId(), param.getCommentId());
 
@@ -90,6 +101,7 @@ public class CommentServiceImpl extends ServiceImpl<CommentMapper, Comment> impl
                     .set(Comment::getUpdateTime, param.getUpdateTime())
                     .eq(Comment::getId, comment.getId()));
         }
+
     }
 
 }

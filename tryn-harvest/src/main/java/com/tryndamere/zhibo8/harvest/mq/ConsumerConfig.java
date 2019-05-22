@@ -3,6 +3,7 @@ package com.tryndamere.zhibo8.harvest.mq;
 import com.tryndamere.zhibo8.harvest.mq.listener.GatherCommentReceiver;
 import com.tryndamere.zhibo8.harvest.mq.listener.GatherNewsReceiver;
 import com.tryndamere.zhibo8.harvest.mq.listener.GatherNewsTotalReceiver;
+import com.tryndamere.zhibo8.harvest.mq.listener.SaveCommentReceiver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.AcknowledgeMode;
@@ -24,11 +25,11 @@ import java.util.concurrent.Executors;
 @Configuration
 public class ConsumerConfig {
     private Logger logger = LoggerFactory.getLogger(ConsumerConfig.class);
-    @Value("${rabbitmq.consumer.executor.size:20}")
+    @Value("${rabbitmq.consumer.executor.size:100}")
     private int executeSize;
-    @Value("${rabbitmq.consumer.concurrentConsumers:5}")
+    @Value("${rabbitmq.consumer.concurrentConsumers:15}")
     private int concurrentConsumers;
-    @Value("${rabbitmq.consumer.maxConcurrentConsumers:10}")
+    @Value("${rabbitmq.consumer.maxConcurrentConsumers:20}")
     private int maxConcurrentConsumers;
 
 
@@ -38,7 +39,6 @@ public class ConsumerConfig {
      * @param connectionFactory
      * @return
      */
-    @Profile(value = "consumer")
     @Bean
     public SimpleRabbitListenerContainerFactory rabbitListenerContainerFactory(ConnectionFactory connectionFactory) {
         logger.info("config consumer TaskExecutor:{},ConcurrentConsumers:{},MaxConcurrentConsumers:{}", executeSize, concurrentConsumers, maxConcurrentConsumers);
@@ -73,5 +73,10 @@ public class ConsumerConfig {
     @Bean
     public GatherCommentReceiver gatherCommentReceiver() {
         return new GatherCommentReceiver();
+    }
+
+    @Bean
+    SaveCommentReceiver saveCommentReceiver(){
+        return new SaveCommentReceiver();
     }
 }

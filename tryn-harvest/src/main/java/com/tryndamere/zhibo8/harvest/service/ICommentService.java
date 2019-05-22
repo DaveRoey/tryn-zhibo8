@@ -1,7 +1,7 @@
 package com.tryndamere.zhibo8.harvest.service;
 
-import com.tryndamere.zhibo8.harvest.entity.Comment;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tryndamere.zhibo8.harvest.entity.Comment;
 import com.tryndamere.zhibo8.harvest.vo.GatherCommentVo;
 
 import java.util.List;
@@ -26,5 +26,8 @@ public interface ICommentService extends IService<Comment> {
      * @param commentId
      * @return
      */
-    public Comment queryCommentByCommentIdAndNewsId(Long newsId, String commentId);
+    Comment queryCommentByCommentIdAndNewsId(Long newsId, String commentId);
+
+    void consumerComment(Comment comment);
+
 }

@@ -16,6 +16,10 @@ spring:
       password: 123456
       test-on-borrow: true
       test-on-return: true
+      remove-abandoned: true
+      remove-abandoned-timeout: 1800
+      time-between-eviction-runs-millis: 3600000
+      min-evictable-idle-time-millis: 18000000
   redis:
     password:
     cluster:
@@ -23,9 +27,9 @@ spring:
       max-redirects: 3
     lettuce:
       pool:
-        max-idle: 20
-        max-active: 20
-        min-idle: 2
+        max-idle: 100
+        max-active: 200
+        min-idle: 10
         max-wait: 2000ms
 
 
@@ -40,6 +44,12 @@ mybatis-plus:
     db-config:
       id-type: id_worker
 
+rabbitmq:
+  consumer:
+    concurrentConsumers: 15
+    maxConcurrentConsumers: 20
+    executor:
+      size: 100
 
 xxl:
   job:

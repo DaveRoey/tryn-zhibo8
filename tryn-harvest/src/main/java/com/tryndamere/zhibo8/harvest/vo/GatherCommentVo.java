@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -17,7 +18,7 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GatherCommentVo {
+public class GatherCommentVo implements Serializable {
     private String id;
     @JsonProperty("filename")
     private String fileName;

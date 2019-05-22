@@ -1,10 +1,7 @@
 package com.tryndamere.zhibo8.harvest.mq;
 
 import com.google.common.collect.Maps;
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.Queue;
-import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.core.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -50,6 +47,16 @@ public class MessageConfig {
         return new TopicExchange(exchangeName);
     }
 
+    /**
+     * 数据采集交换机
+     *
+     * @return
+     */
+    @Bean
+    public DirectExchange saveCommentExchange() {
+        return new DirectExchange("tryn.comment");
+    }
+
 
     @Bean
     public Queue gatherNewsQueue() {
@@ -64,6 +71,11 @@ public class MessageConfig {
     @Bean
     public Queue gatherCommentQueue() {
         return new Queue(gatherCommentQueue, false, false, false, Maps.newHashMap());
+    }
+
+    @Bean
+    public Queue saveCommentQueue() {
+        return new Queue("tryn-save-comment", false, false, false, Maps.newHashMap());
     }
 
     @Bean
@@ -85,6 +97,13 @@ public class MessageConfig {
         return BindingBuilder.bind(gatherCommentQueue)
                 .to(gatherChange)
                 .with(gatherCommentBindingKey);
+    }
+
+    @Bean
+    public Binding saveCommentBinding(DirectExchange saveCommentExchange, Queue saveCommentQueue) {
+        return BindingBuilder.bind(saveCommentQueue)
+                .to(saveCommentExchange)
+                .with("tryn.save.comment");
     }
 
 }

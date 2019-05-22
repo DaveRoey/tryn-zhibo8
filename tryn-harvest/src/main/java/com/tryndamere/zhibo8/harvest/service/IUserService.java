@@ -1,6 +1,7 @@
 package com.tryndamere.zhibo8.harvest.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.tryndamere.zhibo8.harvest.entity.Comment;
 import com.tryndamere.zhibo8.harvest.entity.User;
 import com.tryndamere.zhibo8.harvest.vo.GatherCommentVo;
 
@@ -19,7 +20,7 @@ public interface IUserService extends IService<User> {
      *
      * @param e
      */
-    void saveUserInfo(GatherCommentVo e);
+    void saveUserInfo(Comment e);
 
     /**
      * 根据mUid查询用户

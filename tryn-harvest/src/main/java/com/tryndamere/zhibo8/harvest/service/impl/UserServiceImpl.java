@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.tryndamere.zhibo8.harvest.common.RedisNameSpace;
+import com.tryndamere.zhibo8.harvest.entity.Comment;
 import com.tryndamere.zhibo8.harvest.entity.User;
 import com.tryndamere.zhibo8.harvest.mapper.UserMapper;
 import com.tryndamere.zhibo8.harvest.service.IUserService;
@@ -27,15 +28,15 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     private RedisManager redisManager;
 
     @Override
-    public void saveUserInfo(GatherCommentVo e) {
+    public void saveUserInfo(Comment e) {
         User user = queryUserByMUid(e.getMUid());
         if (user == null) {
             //保存用户信息
             user = new User()
                     .setId(IdWorker.getId())
                     .setMUid(e.getMUid())
-                    .setDeviceName(e.getDevice())
-                    .setUserName(e.getUsername());
+                    .setDeviceName(e.getDeviceName())
+                    .setUserName(e.getUserName());
             this.save(user);
             //放入缓存
             String key = RedisNameSpace.USER_NAME_SPACE + user.getMUid();
@@ -53,6 +54,11 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         if (user == null) {
             user = this.getOne(new LambdaQueryWrapper<User>()
                     .eq(User::getMUid, mUid));
+
+            //放入缓存
+            if (user != null) {
+                redisManager.set(key, user, 300L);
+            }
         }
         return user;
     }

@@ -40,7 +40,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
             this.save(user);
             //放入缓存
             String key = RedisNameSpace.USER_NAME_SPACE + user.getMUid();
-            redisManager.set(key, user, 300L);
+            redisManager.set(key, user, 60 * 60 * 24L);
         }
 
 
@@ -57,7 +57,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
             //放入缓存
             if (user != null) {
-                redisManager.set(key, user, 300L);
+                redisManager.set(key, user, 60 * 60 * 24L);
             }
         }
         return user;

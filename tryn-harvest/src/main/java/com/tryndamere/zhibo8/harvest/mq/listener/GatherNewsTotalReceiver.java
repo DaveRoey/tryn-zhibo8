@@ -34,7 +34,7 @@ public class GatherNewsTotalReceiver {
     private INewsCountInfoService newsCountInfoService;
     private final Logger log = LoggerFactory.getLogger(GatherNewsTotalReceiver.class);
 
-    @RabbitListener(queues = "${rabbitmq.queue.gatherNews.name:tryn-gather-news-total}", containerFactory = "rabbitListenerContainerFactory")
+    @RabbitListener(queues = "${rabbitmq.queue.gatherNews.name:tryn-gather-news-total}")
     public void receive(@Payload NewsTotalDto param) {
         log.info("gather news total :{}", param);
         String url = "https://cache.zhibo8.cc/json/" + DateUtils.format(param.getCreateDate(), PATTERN_TIME) + "/news/nba/" + param.getFileName() + "_count.htm?key=" + Math.random();

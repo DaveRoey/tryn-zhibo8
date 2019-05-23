@@ -18,7 +18,7 @@ public class GatherNewsReceiver {
     INewsService newsService;
     private final Logger log = LoggerFactory.getLogger(GatherNewsReceiver.class);
 
-    @RabbitListener(queues = "${rabbitmq.queue.gatherNews.name:tryn-gather-news}", containerFactory = "rabbitListenerContainerFactory")
+    @RabbitListener(queues = "${rabbitmq.queue.gatherNews.name:tryn-gather-news}")
     public void receive(@Payload GatherNewsVo param) {
         log.info("device runtime status consumer on database :{}", param);
         if (param.getTitle() == null) {

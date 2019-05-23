@@ -48,7 +48,7 @@ public class ConsumerConfig {
         factory.setConnectionFactory(connectionFactory);
         factory.setConcurrentConsumers(concurrentConsumers);
         factory.setMaxConcurrentConsumers(maxConcurrentConsumers);
-        factory.setPrefetchCount(5);
+        factory.setPrefetchCount(2);
         factory.setAcknowledgeMode(AcknowledgeMode.AUTO);
         return factory;
     }

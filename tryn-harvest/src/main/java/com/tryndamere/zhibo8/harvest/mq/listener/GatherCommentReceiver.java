@@ -36,7 +36,7 @@ public class GatherCommentReceiver {
     INewsService newsService;
     private final Logger log = LoggerFactory.getLogger(GatherCommentReceiver.class);
 
-    @RabbitListener(queues = "${rabbitmq.queue.gatherNews.name:tryn-gather-news-comment}", containerFactory = "rabbitListenerContainerFactory")
+    @RabbitListener(queues = "${rabbitmq.queue.gatherNews.name:tryn-gather-news-comment}")
     public void receive(@Payload NewsTotalDto param) {
         log.info("gather news comment param :{}", param);
         IntStream.rangeClosed(0, param.getPageTotal())
